@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divyanshu Mishra | Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #16161f;
+            --bg-hover: #1e1e2e;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: rgba(148, 163, 184, 0.1);
+            --gradient-1: #6366f1;
+            --gradient-2: #8b5cf6;
+            --gradient-3: #ec4899;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled { padding: 0.75rem 5%; background: rgba(10, 10, 15, 0.95); }
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-light);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease;
+        }
+        .hero-badge .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .stat { text-align: center; }
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-light);
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            animation: fadeInUp 0.6s ease 0.5s both;
+        }
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--accent-light);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-tag {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            background: var(--accent-glow);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .section-desc {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .about-text p { margin-bottom: 1rem; }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .skill-category h4 {
+            font-size: 0.85rem;
+            color: var(--accent-light);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .skill-tag {
+            padding: 0.3rem 0.7rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+        .skill-tag:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+            background: var(--accent-glow);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .project-card:hover::before { opacity: 1; }
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-hover), var(--bg-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-image i {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .project-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.35rem 0.75rem;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .project-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        .project-content { padding: 1.5rem; }
+        .project-content h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .project-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+        .project-tech span {
+            padding: 0.25rem 0.6rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+        }
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+        .project-link {
+            flex: 1;
+            padding: 0.6rem;
+            text-align: center;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .project-link:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--accent-light);
+        }
+
+        /* DSA Section */
+        .dsa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+        .dsa-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .dsa-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gradient-1), var(--gradient-2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .dsa-card:hover::before { opacity: 1; }
+        .dsa-card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            transform: translateX(4px);
+        }
+        .dsa-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .dsa-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--accent-glow);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--accent-light);
+        }
+        .dsa-card h3 {
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+        .dsa-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .dsa-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .dsa-topic {
+            padding: 0.3rem 0.6rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+        }
+        .dsa-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1rem;
+            color: var(--accent-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .dsa-link:hover { color: var(--accent); gap: 0.6rem; }
+
+        /* DSA Stats Bar */
+        .dsa-stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .dsa-stat-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .dsa-stat-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        .dsa-stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .dsa-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+        }
+        .achievement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .achievement-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .achievement-card:hover::after { transform: scaleX(1); }
+        .achievement-card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            transform: translateY(-3px);
+        }
+        .achievement-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-glow);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: var(--accent-light);
+        }
+        .achievement-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+        .achievement-card p { font-size: 0.85rem; color: var(--text-secondary); }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin-top: 2rem;
+        }
+        .contact-section h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+        }
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .contact-link {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .contact-link:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        footer .heart { color: #ef4444; animation: pulse 1.5s infinite; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-primary);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-stats { gap: 1.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .dsa-stats-bar { grid-template-columns: repeat(2, 1fr); }
+            section { padding: 3rem 5%; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">&lt;DM /&gt;</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#dsa">DSA</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="pulse"></span>
+                Available for SDE Roles
+            </div>
+            <h1>
+                Hi, I am <span class="gradient-text">Divyanshu Mishra</span>
+            </h1>
+            <p class="hero-subtitle">
+                Software Developer specializing in Python, FastAPI & AI-driven applications.
+                I build scalable backends, intelligent systems, and user-centric web experiences.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">100+</div>
+                    <div class="stat-label">DSA Problems</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">3+</div>
+                    <div class="stat-label">Live Projects</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">AI/ML</div>
+                    <div class="stat-label">Specialization</div>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> View Projects
+                </a>
+                <a href="https://github.com/divyanshu2505" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/divyanshu2505" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/divyanshu-mishra-862ba626a/" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://leetcode.com/u/Divyanshumishra2505/" target="_blank" aria-label="LeetCode">
+                    <i class="fas fa-code"></i>
+                </a>
+                <a href="https://takeuforward.org/profile/dm1537737" target="_blank" aria-label="Striver Profile">
+                    <i class="fas fa-graduation-cap"></i>
+                </a>
+                <a href="mailto:mishradivyanshu270@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header fade-in">
+            <span class="section-tag">About Me</span>
+            <h2 class="section-title">Skills & Expertise</h2>
+            <p class="section-desc">Full-stack developer with a passion for AI, system design, and building products that scale.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text fade-in">
+                <p>
+                    I am a Software Developer based in Gurgaon, Haryana, with expertise in Python, C++, and JavaScript.
+                    My focus is on building AI-enhanced applications and robust backend systems using FastAPI, Django, and REST APIs.
+                </p>
+                <p>
+                    I have hands-on experience developing production-grade tools including an <strong>AI Project Management System</strong>
+                    with risk scoring and bottleneck detection, a <strong>Book Recommendation Engine</strong> using NLP and TF-IDF,
+                    and <strong>Kisan AI</strong> for smart agricultural analytics.
+                </p>
+                <p>
+                    With 100+ DSA problems solved on LeetCode & GFG and completion of the Striver SDE Sheet,
+                    I bring strong algorithmic thinking and system design fundamentals to every project.
+                </p>
+            </div>
+            <div class="skills-grid fade-in">
+                <div class="skill-category">
+                    <h4><i class="fas fa-code"></i> Languages</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-server"></i> Backend</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">SQLAlchemy</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-laptop-code"></i> Frontend</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-database"></i> Databases</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-brain"></i> AI / ML</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Scikit-Learn</span>
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">Recommender Systems</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-tools"></i> DevOps & Tools</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Postman</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Vercel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-header fade-in">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-desc">Production-ready applications built with modern tech stacks. All deployed and live.</p>
+        </div>
+        <div class="projects-grid">
+            <!-- LifeOS AI -->
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-brain"></i>
+                    <span class="project-status">Live</span>
+                </div>
+                <div class="project-content">
+                    <h3>LifeOS AI — All-in-One Super App</h3>
+                    <p>Unified AI workspace with intelligent dashboard, AI chat, document summarization, and productivity automation tools.</p>
+                    <div class="project-tech">
+                        <span>React</span>
+                        <span>FastAPI</span>
+                        <span>LangChain</span>
+                        <span>AI APIs</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://life-os-all-in-one.vercel.app/" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/divyanshu2505" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Where Is My Cargo -->
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-train"></i>
+                    <span class="project-status">Live</span>
+                </div>
+                <div class="project-content">
+                    <h3>Where Is My Cargo — Logistics Tracker</h3>
+                    <p>Real-time freight logistics dashboard tracking Indian Railways cargo with live locomotive status and route mapping.</p>
+                    <div class="project-tech">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>Real-time Data</span>
+                        <span>Maps API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://where-is-my-cargo-jvgg.vercel.app/" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/divyanshu2505" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kisan AI -->
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-seedling"></i>
+                    <span class="project-status">Live</span>
+                </div>
+                <div class="project-content">
+                    <h3>Kisan AI — Smart Farming Platform</h3>
+                    <p>India's intelligent farming assistant with crop health detection using drone/satellite imagery and yield prediction.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>ML/CV</span>
+                        <span>FastAPI</span>
+                        <span>React</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://kisan-ai-steel.vercel.app/" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/divyanshu2505" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Project Management -->
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-project-diagram"></i>
+                    <span class="project-status">Live</span>
+                </div>
+                <div class="project-content">
+                    <h3>AI Project Management Tool</h3>
+                    <p>AI-powered risk scoring, on-time prediction, and bottleneck detection. Dependency analysis with 40% API performance improvement.</p>
+                    <div class="project-tech">
+                        <span>FastAPI</span>
+                        <span>SQLAlchemy</span>
+                        <span>LangChain</span>
+                        <span>Docker</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/divyanshu2505" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Recommendation -->
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-book"></i>
+                    <span class="project-status">Live</span>
+                </div>
+                <div class="project-content">
+                    <h3>Book Recommendation System</h3>
+                    <p>NLP-based recommendation engine using TF-IDF and cosine similarity. Improved accuracy by 18% and reduced latency by 30%.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>NLP</span>
+                        <span>Scikit-Learn</span>
+                        <span>TF-IDF</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/divyanshu2505" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-Commerce & Agriculture -->
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="project-status">Live</span>
+                </div>
+                <div class="project-content">
+                    <h3>AI for E-Commerce & Agriculture</h3>
+                    <p>Personalized shopping engine with recency-based scoring. Crop health detection using computer vision on drone/satellite imagery.</p>
+                    <div class="project-tech">
+                        <span>C++</span>
+                        <span>ML</span>
+                        <span>Computer Vision</span>
+                        <span>Recommendation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/divyanshu2505" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DSA Section -->
+    <section id="dsa">
+        <div class="section-header fade-in">
+            <span class="section-tag">Problem Solving</span>
+            <h2 class="section-title">DSA Progress</h2>
+            <p class="section-desc">100+ problems solved across LeetCode, GFG & Striver SDE Sheet — topic-wise breakdown.</p>
+        </div>
+
+        <!-- DSA Stats Bar -->
+        <div class="dsa-stats-bar fade-in">
+            <div class="dsa-stat-item">
+                <div class="dsa-stat-number">100+</div>
+                <div class="dsa-stat-label">Total Problems</div>
+            </div>
+            <div class="dsa-stat-item">
+                <div class="dsa-stat-number">8</div>
+                <div class="dsa-stat-label">Topics Covered</div>
+            </div>
+            <div class="dsa-stat-item">
+                <div class="dsa-stat-number">3</div>
+                <div class="dsa-stat-label">Platforms</div>
+            </div>
+            <div class="dsa-stat-item">
+                <div class="dsa-stat-number">SDE</div>
+                <div class="dsa-stat-label">Sheet Complete</div>
+            </div>
+        </div>
+
+        <div class="dsa-grid">
+            <!-- Arrays -->
+            <div class="dsa-card fade-in">
+                <div class="dsa-header">
+                    <div class="dsa-icon"><i class="fas fa-th"></i></div>
+                    <h3>Arrays & Strings</h3>
+                </div>
+                <p>Two pointers, sliding window, prefix sum, Kadane's algorithm, majority element, merge intervals.</p>
+                <div class="dsa-topics">
+                    <span class="dsa-topic">Two Pointers</span>
+                    <span class="dsa-topic">Sliding Window</span>
+                    <span class="dsa-topic">Prefix Sum</span>
+                    <span class="dsa-topic">Kadane's</span>
+                    <span class="dsa-topic">Merge Intervals</span>
+                    <span class="dsa-topic">Next Permutation</span>
+                </div>
+                <a href="https://takeuforward.org/interview-sheets/strivers-a2z-dsa-course" target="_blank" class="dsa-link">
+                    <i class="fas fa-external-link-alt"></i> Striver Sheet
+                </a>
+            </div>
+
+            <!-- Linked List -->
+            <div class="dsa-card fade-in">
+                <div class="dsa-header">
+                    <div class="dsa-icon"><i class="fas fa-link"></i></div>
+                    <h3>Linked List</h3>
+                </div>
+                <p>Reverse LL, detect cycle, merge sorted lists, find middle, remove Nth node, add two numbers, flatten multilevel.</p>
+                <div class="dsa-topics">
+                    <span class="dsa-topic">Reverse</span>
+                    <span class="dsa-topic">Cycle Detection</span>
+                    <span class="dsa-topic">Merge Sorted</span>
+                    <span class="dsa-topic">Find Middle</span>
+                    <span class="dsa-topic">Remove Nth Node</span>
+                    <span class="dsa-topic">Add Two Numbers</span>
+                </div>
+                <a href="https://takeuforward.org/interview-sheets/strivers-a2z-dsa-course" target="_blank" class="dsa-link">
+                    <i class="fas fa-external-link-alt"></i> Striver Sheet
+                </a>
+            </div>
+
+            <!-- Trees -->
+            <div class="dsa-card fade-in">
+                <div class="dsa-header">
+                    <div class="dsa-icon"><i class="fas fa-tree"></i></div>
+                    <h3>Trees & BST</h3>
+                </div>
+                <p>Traversals, height, diameter, LCA, path sum, boundary traversal, vertical order, serialize/deserialize, BST validation.</p>
+                <div class="dsa-topics">
+                    <span class="dsa-topic">DFS/BFS</span>
+                    <span class="dsa-topic">Height & Diameter</span>
+                    <span class="dsa-topic">LCA</span>
+                    <span class="dsa-topic">Path Sum</span>
+                    <span class="dsa-topic">Vertical Order</span>
+                    <span class="dsa-topic">BST Validation</span>
+                </div>
+                <a href="https://takeuforward.org/interview-sheets/strivers-a2z-dsa-course" target="_blank" class="dsa-link">
+                    <i class="fas fa-external-link-alt"></i> Striver Sheet
+                </a>
+            </div>
+
+            <!-- Graphs -->
+            <div class="dsa-card fade-in">
+                <div class="dsa-header">
+                    <div class="dsa-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3>Graphs</h3>
+                </div>
+                <p>BFS/DFS, topological sort, shortest path (Dijkstra, Bellman-Ford), MST (Kruskal, Prim), cycle detection, union-find, bridges & articulation points.</p>
+                <div class="dsa-topics">
+                    <span class="dsa-topic">BFS/DFS</span>
+                    <span class="dsa-topic">Topological Sort</span>
+                    <span class="dsa-topic">Dijkstra</span>
+                    <span class="dsa-topic">Kruskal/Prim</span>
+                    <span class="dsa-topic">Union Find</span>
+                    <span class="dsa-topic">Bridges</span>
+                </div>
+                <a href="https://takeuforward.org/interview-sheets/strivers-a2z-dsa-course" target="_blank" class="dsa-link">
+                    <i class="fas fa-external-link-alt"></i> Striver Sheet
+                </a>
+            </div>
+
+            <!-- Dynamic Programming -->
+            <div class="dsa-card fade-in">
+                <div class="dsa-header">
+                    <div class="dsa-icon"><i class="fas fa-chess-knight"></i></div>
+                    <h3>Dynamic Programming</h3>
+                </div>
+                <p>Memoization, tabulation, 0/1 knapsack, unbounded knapsack, LCS, LIS, edit distance, matrix chain, DP on grids & trees.</p>
+                <div class="dsa-topics">
+                    <span class="dsa-topic">Memoization</span>
+                    <span class="dsa-topic">Tabulation</span>
+                    <span class="dsa-topic">Knapsack</span>
+                    <span class="dsa-topic">LCS/LIS</span>
+                    <span class="dsa-topic">Edit Distance</span>
+                    <span class="dsa-topic">DP on Trees</span>
+                </div>
+                <a href="https://takeuforward.org/interview-sheets/strivers-a2z-dsa-course" target="_blank" class="dsa-link">
+                    <i class="fas fa-external-link-alt"></i> Striver Sheet
+                </a>
+            </div>
+
+            <!-- Recursion & Backtracking -->
+            <div class="dsa-card fade-in">
+                <div class="dsa-header">
+                    <div class="dsa-icon"><i class="fas fa-undo-alt"></i></div>
+                    <h3>Recursion & Backtracking</h3>
+                </div>
+                <p>Subsets, permutations, combinations, N-Queens, Sudoku solver, rat in a maze, word search, palindrome partitioning.</p>
+                <div class="dsa-topics">
+                    <span class="dsa-topic">Subsets</span>
+                    <span class="dsa-topic">Permutations</span>
+                    <span class="dsa-topic">N-Queens</span>
+                    <span class="dsa-topic">Sudoku</span>
+                    <span class="dsa-topic">Rat in Maze</span>
+                    <span class="dsa-topic">Word Search</span>
+                </div>
+                <a href="https://takeuforward.org/interview-sheets/strivers-a2z-dsa-course" target="_blank" class="dsa-link">
+                    <i class="fas fa-external-link-alt"></i> Striver Sheet
+                </a>
+            </div>
+
+            <!-- Stacks & Queues -->
+            <div class="dsa-card fade-in">
+                <div class="dsa-header">
+                    <div class="dsa-icon"><i class="fas fa-layer-group"></i></div>
+                    <h3>Stacks & Queues</h3>
+                </div>
+                <p>Next greater element, LRU cache, min stack, evaluate postfix, sliding window max, implement queue using stacks, deque.</p>
+                <div class="dsa-topics">
+                    <span class="dsa-topic">Next Greater</span>
+                    <span class="dsa-topic">LRU Cache</span>
+                    <span class="dsa-topic">Min Stack</span>
+                    <span class="dsa-topic">Postfix Eval</span>
+                    <span class="dsa-topic">Sliding Window Max</span>
+                    <span class="dsa-topic">Deque</span>
+                </div>
+                <a href="https://takeuforward.org/interview-sheets/strivers-a2z-dsa-course" target="_blank" class="dsa-link">
+                    <i class="fas fa-external-link-alt"></i> Striver Sheet
+                </a>
+            </div>
+
+            <!-- Binary Search & Greedy -->
+            <div class="dsa-card fade-in">
+                <div class="dsa-header">
+                    <div class="dsa-icon"><i class="fas fa-search"></i></div>
+                    <h3>Binary Search & Greedy</h3>
+                </div>
+                <p>Lower/upper bound, search in rotated sorted array, allocate books, aggressive cows, job sequencing, activity selection, Huffman coding.</p>
+                <div class="dsa-topics">
+                    <span class="dsa-topic">Lower/Upper Bound</span>
+                    <span class="dsa-topic">Rotated Array</span>
+                    <span class="dsa-topic">Allocate Books</span>
+                    <span class="dsa-topic">Aggressive Cows</span>
+                    <span class="dsa-topic">Job Sequencing</span>
+                    <span class="dsa-topic">Activity Selection</span>
+                </div>
+                <a href="https://takeuforward.org/interview-sheets/strivers-a2z-dsa-course" target="_blank" class="dsa-link">
+                    <i class="fas fa-external-link-alt"></i> Striver Sheet
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+        <div class="section-header fade-in">
+            <span class="section-tag">Track Record</span>
+            <h2 class="section-title">Achievements</h2>
+            <p class="section-desc">Milestones that reflect dedication to continuous learning and problem-solving.</p>
+        </div>
+        <div class="achievements-grid">
+            <div class="achievement-card fade-in">
+                <div class="achievement-icon"><i class="fas fa-trophy"></i></div>
+                <h3>100+ DSA Problems</h3>
+                <p>Solved on LeetCode & GeeksforGeeks with strong grasp of algorithms and data structures.</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-icon"><i class="fas fa-clipboard-check"></i></div>
+                <h3>Striver SDE Sheet</h3>
+                <p>Completed the comprehensive SDE preparation sheet covering all essential coding patterns.</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-icon"><i class="fas fa-rocket"></i></div>
+                <h3>3+ Live Deployments</h3>
+                <p>Production applications deployed on Vercel with real users and active maintenance.</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-icon"><i class="fas fa-brain"></i></div>
+                <h3>AI/ML Specialization</h3>
+                <p>Built multiple AI-driven products including NLP engines and computer vision systems.</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Performance Optimization</h3>
+                <p>Achieved 40% API improvement and 30% latency reduction in production systems.</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>System Design Basics</h3>
+                <p>Strong fundamentals in scalable architecture, database design, and distributed systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-section fade-in">
+            <h2>Let's Build Something Amazing</h2>
+            <p>I am currently open for Software Development Engineer roles and exciting freelance projects. Let's connect!</p>
+            <div class="contact-links">
+                <a href="mailto:mishradivyanshu270@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> mishradivyanshu270@gmail.com
+                </a>
+                <a href="tel:+916393534067" class="contact-link">
+                    <i class="fas fa-phone"></i> +91 63935 34067
+                </a>
+                <a href="https://www.linkedin.com/in/divyanshu-mishra-862ba626a/" target="_blank" class="contact-link">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Built with <span class="heart">❤</span> by Divyanshu Mishra • Gurgaon, Haryana</p>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem;">© 2026 — Deployed on Vercel</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Parallax hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg && scrolled < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
